@@ -1,4 +1,6 @@
 # Thunder.Standard.Lib
+![Nuget (with prereleases)](https://img.shields.io/nuget/v/thunder.standard.lib)
+
 Basic lib for standard.
 Inculde list:
 - Extensions

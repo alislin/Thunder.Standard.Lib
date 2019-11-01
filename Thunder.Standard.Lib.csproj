@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description># Thunder.Standard.Lib
+Basic lib for standard.
+Inculde list:
+- Extensions
+  - Enum  
+    - Description to string
+    - value to enum
+    - string to enum
+  - Json string and object convert tow way
+  - List to ObservableCollection
+  - INotifyPropertyChanged automatic convert property name
+  - Object copy property to new Object (deep copy)
+  - String 
+    - pick number in string to list
+    - check string IsNull?
+    - Clip convert to string list by break or tab or space
+    - Fuzzy search string use Like
+    - Wildcard search string use KeyLike,wildcard = "_"
+- Compress
+  - Include gzip,sharpzip,lz4
+- LargeObject
+Package object,small transfer data.
+- SelectOption
+- ApiClient  
+Easy to webapi by use httpclient,Include package object to largeobject</Description>
+    <Authors>Ya Lin</Authors>
+    <Company>Ya Lin</Company>
+    <Version>1.0.8</Version>
+    <Copyright>Copyright by Ya Lin</Copyright>
+    <PackageLicenseFile></PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="LICENSE.txt" />
+    <None Remove="LICENSE.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="K4os.Compression.LZ4" Version="1.1.11" />
+    <PackageReference Include="K4os.Compression.LZ4.Streams" Version="1.1.11" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="SharpZipLib" Version="1.1.0" />
+  </ItemGroup>
+
+</Project>

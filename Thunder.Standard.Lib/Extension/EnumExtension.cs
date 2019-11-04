@@ -37,5 +37,25 @@ namespace Thunder.Standard.Lib.Extension
             }
             return list;
         }
+
+        public static List<string> ToKeyList<TValue>(this TValue val)
+        {
+            var s = Enum.GetNames(typeof(TValue));
+            var list = new List<string>(s);
+            return list;
+        }
+
+        public static Dictionary<string,int> ToList<TValue>(this TValue val)
+        {
+            Dictionary<string, int> result = new Dictionary<string, int>();
+            var s = Enum.GetValues(typeof(TValue));
+            foreach (var item in s)
+            {
+                var value = (int)item;
+                TValue v = value.ToEnum<TValue>();
+                result.Add(v.ToString(),value);
+            }
+            return result;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Thunder.Standard.Lib.Extension
 {
     public static class EnumExtension
     {
-        public static string ToDescriptionString(this Enum val)
+        public static string ToDescriptionString(this object val)
         {
             DescriptionAttribute[] attributes = (DescriptionAttribute[])val.GetType().GetField(val.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
             return attributes.Length > 0 ? attributes[0].Description : val.ToString();
@@ -25,7 +25,7 @@ namespace Thunder.Standard.Lib.Extension
             return (TValue)Enum.Parse(typeof(TValue), value);
         }
 
-        public static List<SelectOption> ToSelect<TValue>(this TValue val)
+        public static List<SelectOption> ToSelect<TValue>(this TValue val) where TValue : Enum
         {
             var s = Enum.GetValues(typeof(TValue));
             var list = new List<SelectOption>();
@@ -38,7 +38,7 @@ namespace Thunder.Standard.Lib.Extension
             return list;
         }
 
-        public static List<string> ToKeyList<TValue>(this TValue val)
+        public static List<string> ToKeyList<TValue>(this TValue val) where TValue : Enum
         {
             var s = Enum.GetNames(typeof(TValue));
             var list = new List<string>(s);

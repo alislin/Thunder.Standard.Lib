@@ -45,7 +45,7 @@ namespace Thunder.Standard.Lib.Extension
             return list;
         }
 
-        public static Dictionary<string,int> ToList<TValue>(this TValue val) where TValue:Enum
+        public static Dictionary<string,int> ToDicList<TValue>(this TValue val) where TValue:Enum
         {
             Dictionary<string, int> result = new Dictionary<string, int>();
             var s = Enum.GetValues(typeof(TValue));

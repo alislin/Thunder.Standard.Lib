@@ -1,8 +1,10 @@
 # Thunder.Standard.Lib
-![Nuget (with prereleases)](https://img.shields.io/nuget/v/thunder.standard.lib)
+
+[![Build Status](https://dev.azure.com/aideePub/Thunder.Blazor/_apis/build/status/alislin.Thunder.Standard.Lib?branchName=master)](https://dev.azure.com/aideePub/Thunder.Blazor/_build/latest?definitionId=7&branchName=master)![Nuget (with prereleases)](https://img.shields.io/nuget/v/thunder.standard.lib)
 
 Basic lib for standard.
 Inculde list:
+
 - Extensions
   - Enum  
     - Description to string

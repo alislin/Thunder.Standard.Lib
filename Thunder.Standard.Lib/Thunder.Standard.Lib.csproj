@@ -53,4 +53,8 @@ Easy to webapi by use httpclient,Include package object to largeobject</Descript
     <PackageReference Include="SharpZipLib" Version="1.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
+
 </Project>

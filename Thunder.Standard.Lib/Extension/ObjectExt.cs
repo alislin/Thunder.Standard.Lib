@@ -153,6 +153,12 @@ namespace Thunder.Standard.Lib.Extension
 
         }
 
+        /// <summary>
+        /// 复制对象队列到剪贴板(可粘贴到Excel中)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="listObj"></param>
+        /// <returns></returns>
         public static string ClipString<T>(this IList<T> listObj)
         {
             var list = new List<string>();

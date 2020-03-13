@@ -23,9 +23,9 @@ namespace Thunder.Standard.Lib.Extension
             settings.Converters.Add(datetimeConverter);
         }
 
-        public static string ToJson(this object obj)
+        public static string ToJson(this object obj, Formatting format= Formatting.None)
         {
-            return JsonConvert.SerializeObject(obj, Formatting.None, settings);
+            return JsonConvert.SerializeObject(obj, format, settings);
         }
 
         public static T FromJson<T>(this string json)

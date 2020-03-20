@@ -16,16 +16,17 @@ namespace Thunder.Standard.Lib.Helper
 		/// <param name="function"></param>
 		/// <param name="defaultValue">默认值</param>
 		/// <returns></returns>
-		public T TryFun<T>(Func<T> function,T defaultValue=default(T))
+		public static T TryFun<T>(Func<T> function,T defaultValue=default(T), Action<Exception> exAction = null)
         {
 			T result = default(T);
 			try
 			{
 				result = function.Invoke();
 			}
-			catch
+			catch (Exception ex)
 			{
 				result = defaultValue;
+				exAction?.Invoke(ex);
 			}
 			return result;
         }
@@ -34,13 +35,13 @@ namespace Thunder.Standard.Lib.Helper
 		/// 尝试执行 Action 并忽略错误
 		/// </summary>
 		/// <param name="action"></param>
-		public void TryAction(Action action)
+		public static void TryAction(Action action,Action<Exception> exAction=null)
 		{
 			try
 			{
 				action?.Invoke();
 			}
-			catch { }
+			catch(Exception ex) { exAction?.Invoke(ex); }
 		}
     }
 }

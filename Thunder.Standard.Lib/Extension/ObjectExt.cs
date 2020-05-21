@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -253,6 +254,18 @@ namespace Thunder.Standard.Lib.Extension
             objValue.NullCheck();
             return objValue;
         }
+
+        /// <summary>
+        /// 获取属性描述或者名称（描述优先）
+        /// </summary>
+        /// <param name="pinfo"></param>
+        /// <returns></returns>
+        public static string GetPreportyName(this PropertyInfo pinfo)
+        {
+            return Attribute.IsDefined(pinfo, typeof(DescriptionAttribute)) ?
+         (Attribute.GetCustomAttribute(pinfo, typeof(DescriptionAttribute)) as DescriptionAttribute).Description :
+         pinfo.Name;
+        }
     }
 
     public static class TransExp<TIn, TOut>
@@ -286,4 +299,5 @@ namespace Thunder.Standard.Lib.Extension
         }
 
     }
+
 }

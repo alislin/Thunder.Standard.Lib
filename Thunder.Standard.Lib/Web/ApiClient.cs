@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Thunder.Standard.Lib.Extension;
 using Thunder.Standard.Lib.Model;
 
@@ -58,6 +60,9 @@ namespace Thunder.Standard.Lib.Web
 
         public async Task<T> Get<T>(string action, Action<int> onStatusCode = null)
             => await CreateResponse<T>(new RequestData(action, onStatusCode));
+
+        public async Task<T> Delete<T>(string action, Action<int> onStatusCode = null)
+            => await CreateResponse<T>(new RequestData(action, onStatusCode) { Method = HttpMethod.Delete });
 
         public async Task<T> CreateResponse<T>(RequestData data)
         {
@@ -154,6 +159,13 @@ namespace Thunder.Standard.Lib.Web
         public string ActionUrl(string hostUrl, string action, object getObject = null)
         {
             var r = $"{hostUrl}/{action}";
+            if (getObject != null)
+            {
+                var t = getObject.GetType();
+                var ps = t.GetProperties();
+                var vs = ps.Select(x => $"{HttpUtility.UrlEncode(x.GetPreportyName())}={HttpUtility.UrlEncode(x.GetValue(getObject).ToString())}");
+                r = $"{r}?{string.Join("&", vs)}";
+            }
             return r;
         }
 

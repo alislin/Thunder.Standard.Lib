@@ -64,6 +64,12 @@ namespace Thunder.Standard.Lib.Web
         public async Task<T> Delete<T>(string action, Action<int> onStatusCode = null)
             => await CreateResponse<T>(new RequestData(action, onStatusCode) { Method = HttpMethod.Delete });
 
+        public async Task<T> Put<T>(string action, object param, Action<int> onStatusCode = null)
+            => await CreateResponse<T>(new RequestData(action, param, onStatusCode) { Method = HttpMethod.Put });
+
+        public async Task<T> Patch<T>(string action, object param, Action<int> onStatusCode = null)
+    => await CreateResponse<T>(new RequestData(action, param, onStatusCode) { Method = HttpMethod.Patch });
+
         public async Task<T> CreateResponse<T>(RequestData data)
         {
             var headers = data.Headers;
@@ -220,5 +226,13 @@ namespace Thunder.Standard.Lib.Web
         public object Content { get; set; }
         public Action<int> OnStatusCode { get; set; }
         public Action<Exception,RequestData> Catch { get; set; }
+    }
+
+    public class HttpPatch : HttpMethod
+    {
+        public HttpPatch(string method) : base(method)
+        {
+
+        }
     }
 }

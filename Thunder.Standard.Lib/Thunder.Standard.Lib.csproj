@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>7.3</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description># Thunder.Standard.Lib
@@ -31,7 +31,7 @@ Package object,small transfer data.
 Easy to webapi by use httpclient,Include package object to largeobject</Description>
     <Authors>Ya Lin</Authors>
     <Company>Ya Lin</Company>
-    <Version>1.0.12</Version>
+    <Version>1.1.13</Version>
     <Copyright>Copyright by Ya Lin</Copyright>
     <PackageLicenseFile></PackageLicenseFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

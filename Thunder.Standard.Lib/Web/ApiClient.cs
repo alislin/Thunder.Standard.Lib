@@ -58,11 +58,11 @@ namespace Thunder.Standard.Lib.Web
         public async Task<T> Post<T>(string action, object param, Action<int> onStatusCode = null)
             => await CreateResponse<T>(new RequestData(action, param, onStatusCode));
 
-        public async Task<T> Get<T>(string action, Action<int> onStatusCode = null)
-            => await CreateResponse<T>(new RequestData(action, onStatusCode));
+        public async Task<T> Get<T>(string action, object param = null, Action<int> onStatusCode = null)
+            => await CreateResponse<T>(new RequestData(action,param, onStatusCode));
 
-        public async Task<T> Delete<T>(string action, Action<int> onStatusCode = null)
-            => await CreateResponse<T>(new RequestData(action, onStatusCode) { Method = HttpMethod.Delete });
+        public async Task<T> Delete<T>(string action,object param=null, Action<int> onStatusCode = null)
+            => await CreateResponse<T>(new RequestData(action, param, onStatusCode) { Method = HttpMethod.Delete });
 
         public async Task<T> Put<T>(string action, object param, Action<int> onStatusCode = null)
             => await CreateResponse<T>(new RequestData(action, param, onStatusCode) { Method = HttpMethod.Put });

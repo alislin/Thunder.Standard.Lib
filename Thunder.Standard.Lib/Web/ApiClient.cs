@@ -59,7 +59,7 @@ namespace Thunder.Standard.Lib.Web
             => await CreateResponse<T>(new RequestData(action, param, onStatusCode));
 
         public async Task<T> Get<T>(string action, object param = null, Action<int> onStatusCode = null)
-            => await CreateResponse<T>(new RequestData(action,param, onStatusCode));
+            => await CreateResponse<T>(new RequestData(action, param, onStatusCode) { Method= HttpMethod.Get});
 
         public async Task<T> Delete<T>(string action,object param=null, Action<int> onStatusCode = null)
             => await CreateResponse<T>(new RequestData(action, param, onStatusCode) { Method = HttpMethod.Delete });

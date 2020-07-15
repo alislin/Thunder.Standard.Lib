@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thunder.Standard.Lib", "Thu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thunder.Standard.LibTests", "Thunder.Standard.LibTests\Thunder.Standard.LibTests.csproj", "{756813EB-7BB5-467E-8462-230BC929B077}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunder.Standard.Lib.IO.LZ4", "Thunder.Standard.Lib.IO.LZ4\Thunder.Standard.Lib.IO.LZ4.csproj", "{CE7E7541-332E-4562-87BB-60F00C1AA041}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunder.Standard.Lib.IO.SharpZip", "Thunder.Standard.Lib.IO.SharpZip\Thunder.Standard.Lib.IO.SharpZip.csproj", "{2786AD3D-894B-4A12-AB12-E0AAAC6DF3E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunder.Standard.Lib.JsonExtension", "Thunder.Standard.Lib.JsonExtension\Thunder.Standard.Lib.JsonExtension.csproj", "{C7AC059F-B96C-402C-A53F-82FD0194A4DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{756813EB-7BB5-467E-8462-230BC929B077}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{756813EB-7BB5-467E-8462-230BC929B077}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{756813EB-7BB5-467E-8462-230BC929B077}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE7E7541-332E-4562-87BB-60F00C1AA041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE7E7541-332E-4562-87BB-60F00C1AA041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE7E7541-332E-4562-87BB-60F00C1AA041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE7E7541-332E-4562-87BB-60F00C1AA041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2786AD3D-894B-4A12-AB12-E0AAAC6DF3E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2786AD3D-894B-4A12-AB12-E0AAAC6DF3E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2786AD3D-894B-4A12-AB12-E0AAAC6DF3E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2786AD3D-894B-4A12-AB12-E0AAAC6DF3E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7AC059F-B96C-402C-A53F-82FD0194A4DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7AC059F-B96C-402C-A53F-82FD0194A4DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7AC059F-B96C-402C-A53F-82FD0194A4DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7AC059F-B96C-402C-A53F-82FD0194A4DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

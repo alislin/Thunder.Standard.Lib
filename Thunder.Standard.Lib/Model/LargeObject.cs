@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace Thunder.Standard.Lib.Model
 {
-    public class LargeObject : LargeObject<LZ4>
+    public class LargeObject : LargeObject<GZip>
     {
         public LargeObject()
         {
@@ -50,14 +50,8 @@ namespace Thunder.Standard.Lib.Model
             byte[] buf = null;
             switch (EncoderType)
             {
-                case EncoderType.SharpZip:
-                    buf = Buffer.Decode<SharpZip>();
-                    break;
                 case EncoderType.GZip:
                     buf = Buffer.Decode<GZip>();
-                    break;
-                case EncoderType.LZ4:
-                    buf = Buffer.Decode<LZ4>();
                     break;
                 case EncoderType.None:
                     buf = Buffer.Decode<NoneCompress>();

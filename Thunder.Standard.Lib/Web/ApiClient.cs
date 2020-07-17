@@ -21,6 +21,8 @@ namespace Thunder.Standard.Lib.Web
         public string ConnectId { get; set; }
         public Dictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
         public HttpClient HttpClient { get; set; }
+        public Func<object, string> ObjectToJson { get; set; }
+        public Func<string, object> ObjectFromJson { get; set; }
 
         /// <summary>
         /// POST 接收LargeObject封装数据
@@ -105,7 +107,7 @@ namespace Thunder.Standard.Lib.Web
                 if (content != null)
                 {
                     req.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    req.Content = new StringContent(content.ToJson(), Encoding.UTF8, "application/json");
+                    req.Content = new StringContent(ObjectToJson(content), Encoding.UTF8, "application/json");
                 }
 
                 foreach (var item in Headers)
@@ -121,7 +123,7 @@ namespace Thunder.Standard.Lib.Web
                 //    return default(T);
                 //}
 
-                var result = rspbody.FromJson<T>();
+                var result = (T)ObjectFromJson(rspbody);
                 return result;
             }
             catch (Exception ex)

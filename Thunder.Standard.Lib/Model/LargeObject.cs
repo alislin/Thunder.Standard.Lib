@@ -30,6 +30,9 @@ namespace Thunder.Standard.Lib.Model
         public string Type { get; set; }
         public string BufferString { get; set; }
         public EncoderType EncoderType { get; set; }
+
+        public Func<object, string> ObjectToJson { get; set; } 
+        public Func<string, object> ObjectFromJson { get; set; } 
         private byte[] Buffer => System.Convert.FromBase64String(BufferString);
 
         public LargeObject() {  }
@@ -39,7 +42,7 @@ namespace Thunder.Standard.Lib.Model
             EncoderType = (new TEncoder()).Type;
             var type = obj.GetType();
             Type = type.FullName;
-            var s = obj.ToJson();
+            var s = ObjectToJson(obj);
             var buf = Encoding.UTF8.GetBytes(s);
             var result = buf.Encode<TEncoder>(level);
             BufferString = System.Convert.ToBase64String(result);
@@ -63,7 +66,7 @@ namespace Thunder.Standard.Lib.Model
             }
 
             var s = Encoding.UTF8.GetString(buf);
-            var result = s.FromJson<T>();
+            var result = (T)ObjectFromJson(s);
             return result;
         }
 

@@ -171,31 +171,6 @@ namespace Thunder.Standard.Lib.Extension
         }
 
         /// <summary>
-        /// 判断两个对象值相等
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public static bool ValueEqual<T>(this T obja, T objb)
-        {
-            if (obja == null && objb == null)
-            {
-                return true;
-            }
-            if (obja == null || objb == null)
-            {
-                return false;
-            }
-
-            //JSON对比
-            if (obja.ToJson() == objb.ToJson())
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
         /// 类型转换
         /// </summary>
         /// <typeparam name="T">转换的类型</typeparam>

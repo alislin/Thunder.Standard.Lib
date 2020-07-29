@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>
+      # Thunder.Standard.Lib
+      Basic lib for standard.
+    </Description>
+    <Authors>Ya Lin</Authors>
+    <Company>Ya Lin</Company>
+    <Version>1.2.17</Version>
+    <Copyright>Copyright by Ya Lin</Copyright>
+    <PackageLicenseFile></PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

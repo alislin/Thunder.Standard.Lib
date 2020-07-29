@@ -15,14 +15,14 @@ namespace Thunder.Standard.Lib.Web
     /// <summary>
     /// WebApi 客户端
     /// </summary>
-    public class ApiClient
+    public abstract class ApiClient
     {
+        protected abstract string ToJson<T>(T obj);
+        protected abstract T FromJson<T>(string src);
         public Action<string> LogSave { get; set; }
         public string ConnectId { get; set; }
         public Dictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
         public HttpClient HttpClient { get; set; }
-        public Func<object, string> ObjectToJson { get; set; }
-        public Func<string, object> ObjectFromJson { get; set; }
 
         /// <summary>
         /// POST 接收LargeObject封装数据
@@ -107,7 +107,7 @@ namespace Thunder.Standard.Lib.Web
                 if (content != null)
                 {
                     req.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    req.Content = new StringContent(ObjectToJson(content), Encoding.UTF8, "application/json");
+                    req.Content = new StringContent(ToJson(content), Encoding.UTF8, "application/json");
                 }
 
                 foreach (var item in Headers)
@@ -123,7 +123,7 @@ namespace Thunder.Standard.Lib.Web
                 //    return default(T);
                 //}
 
-                var result = (T)ObjectFromJson(rspbody);
+                var result = FromJson<T>(rspbody);
                 return result;
             }
             catch (Exception ex)
@@ -181,6 +181,7 @@ namespace Thunder.Standard.Lib.Web
         {
             LogSave?.Invoke(msg);
         }
+
     }
 
     public class RequestData

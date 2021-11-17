@@ -32,7 +32,7 @@ namespace Thunder.Standard.Lib.Web
         /// <param name="param"></param>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public async Task<T> PostX<T>(string action, object param,Action<int> onStatusCode=null)
+        public async Task<T> PostX<T>(string action, object param, Action<int> onStatusCode = null)
         {
             var url = $"{action}";
             var r = await CreateResponse<LargeObject>(new RequestData(url, param, onStatusCode));
@@ -53,24 +53,24 @@ namespace Thunder.Standard.Lib.Web
             var url = $"{action}";
             var r = await CreateResponse<LargeObject>(new RequestData(url, onStatusCode));
             var result = default(T);
-            if (r != null) result= r.LoadFromLargeObject<T>();
+            if (r != null) result = r.LoadFromLargeObject<T>();
             return result;
         }
 
-        public async Task<T> Post<T>(string action, object param, Action<int> onStatusCode = null)
-            => await CreateResponse<T>(new RequestData(action, param, onStatusCode));
+        public async Task<T> Post<T>(string action, object param, Action<int> onStatusCode = null, Action<Exception, RequestData> @catch = null)
+            => await CreateResponse<T>(new RequestData(action, param, onStatusCode, @catch));
 
-        public async Task<T> Get<T>(string action, object param = null, Action<int> onStatusCode = null)
-            => await CreateResponse<T>(new RequestData(action, param, onStatusCode) { Method= HttpMethod.Get});
+        public async Task<T> Get<T>(string action, object param = null, Action<int> onStatusCode = null, Action<Exception, RequestData> @catch = null)
+            => await CreateResponse<T>(new RequestData(action, param, onStatusCode, @catch) { Method = HttpMethod.Get });
 
-        public async Task<T> Delete<T>(string action,object param=null, Action<int> onStatusCode = null)
-            => await CreateResponse<T>(new RequestData(action, param, onStatusCode) { Method = HttpMethod.Delete });
+        public async Task<T> Delete<T>(string action, object param = null, Action<int> onStatusCode = null, Action<Exception, RequestData> @catch = null)
+            => await CreateResponse<T>(new RequestData(action, param, onStatusCode, @catch) { Method = HttpMethod.Delete });
 
-        public async Task<T> Put<T>(string action, object param, Action<int> onStatusCode = null)
-            => await CreateResponse<T>(new RequestData(action, param, onStatusCode) { Method = HttpMethod.Put });
+        public async Task<T> Put<T>(string action, object param, Action<int> onStatusCode = null, Action<Exception, RequestData> @catch = null)
+            => await CreateResponse<T>(new RequestData(action, param, onStatusCode, @catch) { Method = HttpMethod.Put });
 
-        public async Task<T> Patch<T>(string action, object param, Action<int> onStatusCode = null)
-    => await CreateResponse<T>(new RequestData(action, param, onStatusCode) { Method = HttpMethod.Patch });
+        public async Task<T> Patch<T>(string action, object param, Action<int> onStatusCode = null, Action<Exception, RequestData> @catch = null)
+    => await CreateResponse<T>(new RequestData(action, param, onStatusCode, @catch) { Method = HttpMethod.Patch });
 
         public async Task<T> CreateResponse<T>(RequestData data)
         {
@@ -140,7 +140,7 @@ namespace Thunder.Standard.Lib.Web
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public void AddHeaders(string key,string value)
+        public void AddHeaders(string key, string value)
         {
             if (Headers.ContainsKey(key))
             {
@@ -190,37 +190,41 @@ namespace Thunder.Standard.Lib.Web
         {
         }
 
-        public RequestData(string url, Action<int> onStatusCode=null)
+        public RequestData(string url, Action<int> onStatusCode = null, Action<Exception, RequestData> @catch = null)
         {
             Url = url;
             OnStatusCode = onStatusCode;
             Method = HttpMethod.Get;
+            Catch = @catch;
         }
 
-        public RequestData(string url, object data, Action<int> onStatusCode=null)
+        public RequestData(string url, object data, Action<int> onStatusCode = null, Action<Exception, RequestData> @catch = null)
         {
             Url = url;
             Content = data;
             OnStatusCode = onStatusCode;
             Method = HttpMethod.Post;
+            Catch = @catch;
         }
 
-        public RequestData(string url, object data, Dictionary<string, string> headers, Action<int> onStatusCode=null)
+        public RequestData(string url, object data, Dictionary<string, string> headers, Action<int> onStatusCode = null, Action<Exception, RequestData> @catch = null)
         {
             Headers = headers;
             Url = url;
             Content = data;
             OnStatusCode = onStatusCode;
             Method = HttpMethod.Post;
+            Catch = @catch;
         }
 
-        public RequestData(string url, object data, Dictionary<string, string> headers, HttpMethod method,  Action<int> onStatusCode=null)
+        public RequestData(string url, object data, Dictionary<string, string> headers, HttpMethod method, Action<int> onStatusCode = null, Action<Exception, RequestData> @catch = null)
         {
             Method = method;
             Headers = headers;
             Url = url;
             Content = data;
             OnStatusCode = onStatusCode;
+            Catch = @catch;
         }
 
         public HttpMethod Method { get; set; } = HttpMethod.Get;
@@ -228,7 +232,7 @@ namespace Thunder.Standard.Lib.Web
         public string Url { get; set; }
         public object Content { get; set; }
         public Action<int> OnStatusCode { get; set; }
-        public Action<Exception,RequestData> Catch { get; set; }
+        public Action<Exception, RequestData> Catch { get; set; }
     }
 
     public class HttpPatch : HttpMethod

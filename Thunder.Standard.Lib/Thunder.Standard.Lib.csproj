@@ -31,7 +31,7 @@ Package object,small transfer data.
 Easy to webapi by use httpclient,Include package object to largeobject</Description>
     <Authors>Ya Lin</Authors>
     <Company>Ya Lin</Company>
-    <Version>1.2.20</Version>
+    <Version>1.2.21</Version>
     <Copyright>Copyright by Ya Lin</Copyright>
     <PackageLicenseFile></PackageLicenseFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

@@ -76,12 +76,14 @@ namespace Thunder.Standard.Lib.Web
         /// 开始请求前执行
         /// </summary>
         /// <param name="requestMessage"></param>
-        public virtual void OnBeforeRequest(HttpRequestMessage requestMessage) { }
+        /// <returns>用户数据</returns>
+        public virtual object OnBeforeRequest(HttpRequestMessage requestMessage) { return null; }
         /// <summary>
         /// 接收数据后执行
         /// </summary>
         /// <param name="responseBody"></param>
-        public virtual void OnEndResponse(string responseBody) { }
+        /// <param name="userData">用户数据</param>
+        public virtual void OnEndResponse(string responseBody, object userData) { }
 
         public async Task<T> CreateResponse<T>(RequestData data)
         {
@@ -126,13 +128,13 @@ namespace Thunder.Standard.Lib.Web
                     req.Headers.Add(item.Key, item.Value);
                 }
 
-                OnBeforeRequest(req);
+                var userData = OnBeforeRequest(req);
 
                 var rsp = await client.SendAsync(req);
                 data.OnStatusCode?.Invoke((int)rsp.StatusCode);
                 var rspbody = rsp.Content.ReadAsStringAsync().Result;
 
-                OnEndResponse(rspbody);
+                OnEndResponse(rspbody, userData);
                 //if ((int)rsp.StatusCode>=400)
                 //{
                 //    return default(T);

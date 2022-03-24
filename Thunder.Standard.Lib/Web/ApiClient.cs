@@ -72,6 +72,17 @@ namespace Thunder.Standard.Lib.Web
         public async Task<T> Patch<T>(string action, object param, Action<int> onStatusCode = null, Action<Exception, RequestData> @catch = null)
     => await CreateResponse<T>(new RequestData(action, param, onStatusCode, @catch) { Method = HttpMethod.Patch });
 
+        /// <summary>
+        /// 开始请求前执行
+        /// </summary>
+        /// <param name="requestMessage"></param>
+        public virtual void OnBeforeRequest(HttpRequestMessage requestMessage) { }
+        /// <summary>
+        /// 接收数据后执行
+        /// </summary>
+        /// <param name="responseBody"></param>
+        public virtual void OnEndResponse(string responseBody) { }
+
         public async Task<T> CreateResponse<T>(RequestData data)
         {
             var headers = data.Headers;
@@ -115,9 +126,13 @@ namespace Thunder.Standard.Lib.Web
                     req.Headers.Add(item.Key, item.Value);
                 }
 
+                OnBeforeRequest(req);
+
                 var rsp = await client.SendAsync(req);
                 data.OnStatusCode?.Invoke((int)rsp.StatusCode);
                 var rspbody = rsp.Content.ReadAsStringAsync().Result;
+
+                OnEndResponse(rspbody);
                 //if ((int)rsp.StatusCode>=400)
                 //{
                 //    return default(T);

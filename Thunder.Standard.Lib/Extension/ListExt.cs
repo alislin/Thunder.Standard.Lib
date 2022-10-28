@@ -10,5 +10,12 @@ namespace Thunder.Standard.Lib.Extension
             var l = new ObservableCollection<T>(list);
             return l;
         }
+        public static bool HasValue<T>(this IList<T> list)
+        {
+            return (list?.Count ?? 0) > 0;
+        }
+
+        public static bool IsEmpty<T>(this IList<T> list) => !HasValue(list);
+
     }
 }

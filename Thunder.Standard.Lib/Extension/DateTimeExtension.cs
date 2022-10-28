@@ -123,5 +123,50 @@ namespace Thunder.Standard.Lib.Extension
             }
         }
 
+        public static string ToDate(this DateTime date, bool autoSwitch = true) => autoSwitch && date.Year != DateTime.Now.Year ? date.ToLongDate() : date.ToString("M月d日");
+        public static string ToLongDate(this DateTime date) => date.ToString("yyyy年M月d日");
+
+        public static DateTime MondayOfWeek(this DateTime date)
+        {
+            var w = 1 - (int)date.DayOfWeek;
+            w = w > 0 ? -6 : w;
+            return date.AddDays(w);
+        }
+
+        /// <summary>
+        /// 获取月份
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="startOfMonth">每月开始日期(大于10时从上月开始算)</param>
+        /// <returns></returns>
+        public static int ToMonth(this DateTime date, int startOfMonth = 1)
+        {
+            var m = date.Month;
+            if (startOfMonth > 10 && date.Day >= startOfMonth)
+            {
+                m = date.AddMonths(1).Month;
+            }
+            return m;
+        }
+
+        public static int ToYearMonth(this DateTime date, int startOfMonth = 1)
+        {
+            var m = date.Year * 100 + date.Month;
+            if (startOfMonth > 10 && date.Day >= startOfMonth)
+            {
+                var d = date.AddMonths(1);
+                m = d.Year * 100 + d.Month;
+            }
+            return m;
+        }
+
+        public static DateTime FromYearMonth(this int month, int day = 1)
+        {
+            var y = month / 100;
+            var m = month % 100;
+            return new DateTime(y, m, day);
+        }
+
+
     }
 }
